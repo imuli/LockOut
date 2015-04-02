@@ -43,7 +43,7 @@ private boolean isEnabled(Context context){
 
 	Log.v("UserPresent", "start: " + start + " now: " + now + " stop: " + stop);
 
-	if(start < stop){
+	if(start <= stop){
 		return start < now && now < stop;
 	} else {
 		return start < now || now < stop;
