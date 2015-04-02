@@ -3,7 +3,14 @@
     <CheckBoxPreference
         android:key="enable"
         android:title="@string/pref_title_enable"
-        android:summary="@string/pref_description_enable"
         android:defaultValue="true" />
+	<li.imu.lockout.TimePreference
+		android:key="start"
+		android:title="@string/pref_title_start"
+		android:defaultValue="0"/>
+	<li.imu.lockout.TimePreference
+		android:key="stop"
+		android:title="@string/pref_title_stop"
+		android:defaultValue="0"/>
 
 </PreferenceScreen>

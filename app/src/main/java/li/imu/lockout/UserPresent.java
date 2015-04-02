@@ -4,19 +4,18 @@ import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import java.util.TimeZone;
+
 public class UserPresent extends BroadcastReceiver {
-static boolean actually=false;
 @Override
 public void onReceive(Context context, Intent intent) {
 	Log.v("UserPresent", "Present");
 	if(isEnabled(context)) {
-		actually = !actually;
-		if(actually){
 			lockScreen(context);
-		}
 	}
 }
 
@@ -29,7 +28,26 @@ private void lockScreen(Context context) {
 }
 
 private boolean isEnabled(Context context){
-	return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("enable", false);
+	SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+	if(!preferences.getBoolean("enable", false)) return false;
+
+	TimeZone tz = TimeZone.getDefault();
+
+	/* This will be off by a few seconds due to leap seconds. */
+	long now = System.currentTimeMillis();
+	long offset = tz.getOffset(0) - tz.getOffset(now);
+	now = now  % (1000*60*60*24) - offset;
+
+	long start = preferences.getLong("start", 0);
+	long stop = preferences.getLong("stop", 0);
+
+	Log.v("UserPresent", "start: " + start + " now: " + now + " stop: " + stop);
+
+	if(start < stop){
+		return start < now && now < stop;
+	} else {
+		return start < now || now < stop;
+	}
 }
 
 }
