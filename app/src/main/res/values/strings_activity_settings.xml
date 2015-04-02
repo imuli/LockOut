@@ -1,0 +1,11 @@
+<resources>
+
+	<!-- Strings related to Settings -->
+
+	<!-- Example General settings -->
+	<string name="pref_header_general">General</string>
+
+	<string name="pref_title_enable">Enable Lock Out</string>
+	<string name="pref_description_enable"></string>
+
+</resources>
