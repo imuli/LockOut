@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.util.Log;
 
 public class UserPresent extends BroadcastReceiver {
-@Override
-public void onReceive(Context context, Intent intent) {
+
+@Override public void
+onReceive(Context context, Intent intent) {
 	Log.v("UserPresent", "Present");
 	if(Util.isEnabled(context)) {
 			Util.lockScreen(context);
