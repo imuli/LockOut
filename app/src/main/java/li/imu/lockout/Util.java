@@ -20,6 +20,12 @@ lockScreen(Context context) {
 }
 
 public static boolean
+preventSettings(Context context){
+	SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+	return preferences.getBoolean("prevent_settings", false) && isEnabled(context);
+}
+
+public static boolean
 isEnabled(Context context){
 	SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 	if(!preferences.getBoolean("enable", false)) return false;

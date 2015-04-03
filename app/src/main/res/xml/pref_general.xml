@@ -12,5 +12,10 @@
 		android:key="stop"
 		android:title="@string/pref_title_stop"
 		android:defaultValue="0"/>
+	<CheckBoxPreference
+		android:key="prevent_settings"
+		android:title="@string/pref_title_prevent_settings"
+		android:summary="@string/pref_desc_prevent_settings"
+		android:defaultValue="true" />
 
 </PreferenceScreen>
