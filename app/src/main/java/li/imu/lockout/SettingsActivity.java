@@ -43,6 +43,12 @@ public class SettingsActivity extends PreferenceActivity {
 protected void onPostCreate(Bundle savedInstanceState) {
 	super.onPostCreate(savedInstanceState);
 	addPreferencesFromResource(R.xml.pref_general);
+}
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+
 	Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
 	intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
 			new ComponentName(this, DeviceAdmin.class));
