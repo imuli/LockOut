@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 		  package="li.imu.lockout" >
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
+	<uses-permission android:name="android.permission.READ_CALENDAR" />
 
 	<application
 		android:allowBackup="true"

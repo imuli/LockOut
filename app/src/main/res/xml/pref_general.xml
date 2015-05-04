@@ -4,6 +4,11 @@
         android:key="enable"
         android:title="@string/pref_title_enable"
         android:defaultValue="false" />
+	<li.imu.lockout.CalendarPreference
+		android:key="calendar"
+		android:title="@string/pref_calendar"
+		android:summary="@string/pref_desc_calendar"
+		android:defaultValue="-1" />
 	<li.imu.lockout.TimePreference
 		android:key="start"
 		android:title="@string/pref_title_start"
