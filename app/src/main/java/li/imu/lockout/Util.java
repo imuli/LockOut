@@ -1,9 +1,14 @@
 package li.imu.lockout;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.CalendarContract.Instances;
 import android.util.Log;
 
 import java.util.TimeZone;
@@ -29,6 +34,7 @@ public static boolean
 isEnabled(Context context){
 	SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 	if(!preferences.getBoolean("enable", false)) return false;
+	if(calendarIsEnabled(preferences, context)) return true;
 
 	TimeZone tz = TimeZone.getDefault();
 
@@ -47,6 +53,27 @@ isEnabled(Context context){
 	} else {
 		return start < now || now < stop;
 	}
+}
+
+private static final String[] InstanceFields = new String[] {
+		Instances._ID,
+};
+
+private static boolean
+calendarIsEnabled(SharedPreferences preferences, Context context) {
+	String calendarId = preferences.getString("calendar", "-1");
+	if(calendarId.equals("-1"))
+		return false;
+
+	long now = System.currentTimeMillis();
+	ContentResolver cr = context.getContentResolver();
+	String selection = Instances.CALENDAR_ID + "= ?";
+	String[] selectionArgs = new String[] {calendarId};
+	Uri.Builder uri = Instances.CONTENT_URI.buildUpon();
+	ContentUris.appendId(uri, now);
+	ContentUris.appendId(uri, now);
+	Cursor cur = cr.query(uri.build(), InstanceFields, selection, selectionArgs, null);
+	return cur.getCount() > 0;
 }
 
 }
