@@ -43,11 +43,11 @@ loadCalendars(){
 	lEntryValues = new CharSequence[lCursor.getCount()+1];
 	lEntries[0] = "None";
 	lEntryValues[0] = "-1";
-	lCursor.moveToFirst();
-	for(int i = 0; i < lCursor.getCount(); i++){
-		lEntryValues[i+1] = Long.toString(lCursor.getInt(IdFieldIndex));
-		lEntries[i+1] = lCursor.getString(DisplayFieldIndex);
-		lCursor.moveToNext();
+	lCursor.moveToLast();
+	for(int i = lCursor.getCount(); i > 0; i--){
+		lEntryValues[i] = Long.toString(lCursor.getInt(IdFieldIndex));
+		lEntries[i] = lCursor.getString(DisplayFieldIndex);
+		lCursor.moveToPrevious();
 	}
 	this.setEntries(lEntries);
 	this.setEntryValues(lEntryValues);

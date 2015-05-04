@@ -5,5 +5,5 @@
 	<string name="pref_title_prevent_settings">Prevent Settings</string>
 	<string name="pref_desc_prevent_settings">Disallow access to these settings during Lock Out.</string>
 	<string name="pref_calendar">Calendar</string>
-	<string name="pref_desc_calendar">Manage LockOut schedule via a calendar.</string>
+	<string name="pref_desc_calendar">Manage Lock Out schedule via a calendar.</string>
 </resources>
